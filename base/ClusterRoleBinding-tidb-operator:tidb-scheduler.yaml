@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: scheduler
+    app.kubernetes.io/instance: tidb-operator
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: tidb-operator
+    helm.sh/chart: tidb-operator-dev
+  name: tidb-operator:tidb-scheduler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tidb-operator:tidb-scheduler
+subjects:
+- kind: ServiceAccount
+  name: tidb-scheduler
+  namespace: default

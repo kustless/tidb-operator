@@ -1,0 +1,34 @@
+{
+  "v1": {
+    "config": null,
+    "helmValues": "# Default values for tidb-operator\n\n# clusterScoped is whether tidb-operator should manage kubernetes cluster wide tidb clusters\n# Also see rbac.create and controllerManager.serviceAccount\nclusterScoped: true\n\n# Also see clusterScoped and controllerManager.serviceAccount\nrbac:\n  create: true\n\n# operatorImage is TiDB Operator image\noperatorImage: pingcap/tidb-operator:v1.0.0-beta.2\nimagePullPolicy: IfNotPresent\n\ndefaultStorageClassName: local-storage\n\ncontrollerManager:\n  # With rbac.create=false, the user is responsible for creating this account\n  # With rbac.create=true, this service account will be created\n  # Also see rbac.create and clusterScoped\n  serviceAccount: tidb-controller-manager\n  logLevel: 2\n  replicas: 1\n  resources:\n    limits:\n      cpu: 250m\n      memory: 150Mi\n    requests:\n      cpu: 80m\n      memory: 50Mi\n  # autoFailover is whether tidb-operator should auto failover when failure occurs\n  autoFailover: false\n  # pd failover period default(5m)\n  pdFailoverPeriod: 5m\n  # tikv failover period default(5m)\n  tikvFailoverPeriod: 5m\n  # tidb failover period default(5m)\n  tidbFailoverPeriod: 5m\n\nscheduler:\n  # With rbac.create=false, the user is responsible for creating this account\n  # With rbac.create=true, this service account will be created\n  # Also see rbac.create and clusterScoped\n  serviceAccount: tidb-scheduler\n  logLevel: 2\n  replicas: 1\n  schedulerName: tidb-scheduler\n  # features:\n  # - StableScheduling\n  resources:\n    limits:\n      cpu: 250m\n      memory: 150Mi\n    requests:\n      cpu: 80m\n      memory: 50Mi\n  kubeSchedulerImageName: gcr.io/google-containers/hyperkube\n  # This will default to matching your kubernetes version\n  # kubeSchedulerImageTag:\n",
+    "releaseName": "tidb-operator",
+    "helmValuesDefaults": "# Default values for tidb-operator\n\n# clusterScoped is whether tidb-operator should manage kubernetes cluster wide tidb clusters\n# Also see rbac.create and controllerManager.serviceAccount\nclusterScoped: true\n\n# Also see clusterScoped and controllerManager.serviceAccount\nrbac:\n  create: true\n\n# operatorImage is TiDB Operator image\noperatorImage: pingcap/tidb-operator:v1.0.0-beta.2\nimagePullPolicy: IfNotPresent\n\ndefaultStorageClassName: local-storage\n\ncontrollerManager:\n  # With rbac.create=false, the user is responsible for creating this account\n  # With rbac.create=true, this service account will be created\n  # Also see rbac.create and clusterScoped\n  serviceAccount: tidb-controller-manager\n  logLevel: 2\n  replicas: 1\n  resources:\n    limits:\n      cpu: 250m\n      memory: 150Mi\n    requests:\n      cpu: 80m\n      memory: 50Mi\n  # autoFailover is whether tidb-operator should auto failover when failure occurs\n  autoFailover: false\n  # pd failover period default(5m)\n  pdFailoverPeriod: 5m\n  # tikv failover period default(5m)\n  tikvFailoverPeriod: 5m\n  # tidb failover period default(5m)\n  tidbFailoverPeriod: 5m\n\nscheduler:\n  # With rbac.create=false, the user is responsible for creating this account\n  # With rbac.create=true, this service account will be created\n  # Also see rbac.create and clusterScoped\n  serviceAccount: tidb-scheduler\n  logLevel: 2\n  replicas: 1\n  schedulerName: tidb-scheduler\n  # features:\n  # - StableScheduling\n  resources:\n    limits:\n      cpu: 250m\n      memory: 150Mi\n    requests:\n      cpu: 80m\n      memory: 50Mi\n  kubeSchedulerImageName: gcr.io/google-containers/hyperkube\n  # This will default to matching your kubernetes version\n  # kubeSchedulerImageTag:\n",
+    "upstream": "github.com/pingcap/tidb-operator/charts/tidb-operator",
+    "metadata": {
+      "applicationType": "helm",
+      "sequence": 0,
+      "name": "tidb-operator",
+      "releaseNotes": "Support stable scheduling for TiDB (#477)\n\n* Support stable scheduling for TiDB\r\n\r\n* Update pkg/scheduler/predicates/stable_scheduling.go\r\n\r\nCo-Authored-By: weekface \u003cweekface@gmail.com\u003e\r\n\r\n* Add feature gate\r\n\r\n* charts and e2e tests\r\n\r\n* simplify chart values\r\n\r\n* fix go lint failure",
+      "version": "dev",
+      "license": {
+        "id": "",
+        "assignee": "",
+        "createdAt": "0001-01-01T00:00:00Z",
+        "expiresAt": "0001-01-01T00:00:00Z",
+        "type": ""
+      }
+    },
+    "contentSHA": "1bba5af1ebfd113b37d074591210661b31b457515872819e811de2553b2b6eb0",
+    "lifecycle": {
+      "stepsCompleted": {
+        "intro": true,
+        "kustomize": true,
+        "kustomize-intro": true,
+        "outro": true,
+        "render": true,
+        "values": true
+      }
+    }
+  }
+}

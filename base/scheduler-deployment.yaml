@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: scheduler
+    app.kubernetes.io/instance: tidb-operator
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: tidb-operator
+    helm.sh/chart: tidb-operator-dev
+  name: tidb-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: scheduler
+      app.kubernetes.io/instance: tidb-operator
+      app.kubernetes.io/name: tidb-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: scheduler
+        app.kubernetes.io/instance: tidb-operator
+        app.kubernetes.io/name: tidb-operator
+    spec:
+      containers:
+      - command:
+        - /usr/local/bin/tidb-scheduler
+        - -v=2
+        - -port=10262
+        image: pingcap/tidb-operator:v1.0.0-beta.2
+        imagePullPolicy: IfNotPresent
+        name: tidb-scheduler
+        resources:
+          limits:
+            cpu: 250m
+            memory: 150Mi
+          requests:
+            cpu: 80m
+            memory: 50Mi
+      - command:
+        - kube-scheduler
+        - --port=10261
+        - --leader-elect=true
+        - --lock-object-name=tidb-scheduler
+        - --lock-object-namespace=default
+        - --scheduler-name=tidb-scheduler
+        - --v=2
+        - --policy-configmap=tidb-scheduler-policy
+        - --policy-configmap-namespace=default
+        image: gcr.io/google-containers/hyperkube:v1.9.0
+        imagePullPolicy: IfNotPresent
+        name: kube-scheduler
+        resources:
+          limits:
+            cpu: 250m
+            memory: 150Mi
+          requests:
+            cpu: 80m
+            memory: 50Mi
+      serviceAccount: tidb-scheduler

@@ -1,0 +1,12 @@
+kind: ""
+apiversion: ""
+resources:
+- ClusterRole-tidb-operator:tidb-controller-manager.yaml
+- ClusterRole-tidb-operator:tidb-scheduler.yaml
+- ClusterRoleBinding-tidb-operator:tidb-controller-manager.yaml
+- ClusterRoleBinding-tidb-operator:tidb-scheduler.yaml
+- ServiceAccount-tidb-controller-manager.yaml
+- ServiceAccount-tidb-scheduler.yaml
+- controller-manager-deployment.yaml
+- scheduler-deployment.yaml
+- scheduler-policy-configmap.yaml
