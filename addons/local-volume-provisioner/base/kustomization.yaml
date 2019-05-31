@@ -1,0 +1,10 @@
+kind: ""
+apiversion: ""
+resources:
+- ClusterRole-local-storage-provisioner-node-clusterrole-kube-system.yaml
+- ClusterRoleBinding-local-storage-provisioner-node-binding-kube-system.yaml
+- ClusterRoleBinding-local-storage-provisioner-pv-binding-kube-system.yaml
+- ConfigMap-local-provisioner-config-kube-system.yaml
+- DaemonSet-local-volume-provisioner-kube-system.yaml
+- ServiceAccount-local-storage-admin-kube-system.yaml
+- StorageClass-local-storage.yaml

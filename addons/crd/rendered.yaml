@@ -1,0 +1,94 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: tidbclusters.pingcap.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .spec.pd.image
+    description: The image for PD cluster
+    name: PD
+    type: string
+  - JSONPath: .spec.pd.requests.storage
+    description: The storage size specified for PD node
+    name: Storage
+    type: string
+  - JSONPath: .status.pd.statefulSet.readyReplicas
+    description: The ready replicas number of PD cluster
+    name: Ready
+    type: integer
+  - JSONPath: .spec.pd.replicas
+    description: The desired replicas number of PD cluster
+    name: Desire
+    type: integer
+  - JSONPath: .spec.tikv.image
+    description: The image for TiKV cluster
+    name: TiKV
+    type: string
+  - JSONPath: .spec.tikv.requests.storage
+    description: The storage size specified for TiKV node
+    name: Storage
+    type: string
+  - JSONPath: .status.tikv.statefulSet.readyReplicas
+    description: The ready replicas number of TiKV cluster
+    name: Ready
+    type: integer
+  - JSONPath: .spec.tikv.replicas
+    description: The desired replicas number of TiKV cluster
+    name: Desire
+    type: integer
+  - JSONPath: .spec.tidb.image
+    description: The image for TiDB cluster
+    name: TiDB
+    type: string
+  - JSONPath: .status.tidb.statefulSet.readyReplicas
+    description: The ready replicas number of TiDB cluster
+    name: Ready
+    type: integer
+  - JSONPath: .spec.tidb.replicas
+    description: The desired replicas number of TiDB cluster
+    name: Desire
+    type: integer
+  group: pingcap.com
+  names:
+    kind: TidbCluster
+    plural: tidbclusters
+    shortNames:
+    - tc
+    singular: tidbcluster
+  scope: Namespaced
+  validation:
+    openAPIV3Schema:
+      properties:
+        spec:
+          properties:
+            pd:
+              properties:
+                limits:
+                  properties:
+                    cpu:
+                      type: string
+                requests:
+                  properties:
+                    cpu:
+                      type: string
+            tidb:
+              properties:
+                limits:
+                  properties:
+                    cpu:
+                      type: string
+                requests:
+                  properties:
+                    cpu:
+                      type: string
+            tikv:
+              properties:
+                limits:
+                  properties:
+                    cpu:
+                      type: string
+                requests:
+                  properties:
+                    cpu:
+                      type: string
+  version: v1alpha1
