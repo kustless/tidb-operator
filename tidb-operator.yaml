@@ -334,7 +334,7 @@ spec:
               fieldPath: metadata.namespace
         - name: TZ
           value: UTC
-        image: pingcap/tidb-operator:v1.0.0-beta.2
+        image: pingcap/tidb-operator:v1.0.0-beta.3
         imagePullPolicy: IfNotPresent
         name: tidb-operator
         resources:
@@ -375,7 +375,7 @@ spec:
         - /usr/local/bin/tidb-scheduler
         - -v=2
         - -port=10262
-        image: pingcap/tidb-operator:v1.0.0-beta.2
+        image: pingcap/tidb-operator:v1.0.0-beta.3
         imagePullPolicy: IfNotPresent
         name: tidb-scheduler
         resources:
