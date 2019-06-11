@@ -95,6 +95,13 @@ spec:
           value: quay.io/external_storage/local-volume-provisioner:v2.2.0
         image: quay.io/external_storage/local-volume-provisioner:v2.2.0
         name: provisioner
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100m
+          requests:
+            cpu: 100m
+            memory: 100m
         securityContext:
           privileged: true
         volumeMounts:
